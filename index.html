@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Você vem comigo?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pacifico&display=swap');
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505;color:#fff}
+body{font-family:Arial,sans-serif}
+.scene{position:relative;width:100%;height:100%;overflow:hidden;background:linear-gradient(#ff8b38 0%,#e34d28 25%,#211519 55%,#050505 100%)}
+.sun{position:absolute;width:190px;height:190px;border-radius:50%;background:#ffd36a;left:50%;top:27%;transform:translate(-50%,-50%);box-shadow:0 0 80px #ffb83e;opacity:.95}
+.cloud{position:absolute;background:rgba(255,190,120,.22);width:300px;height:60px;border-radius:50%;filter:blur(12px);animation:cloud 25s linear infinite}
+.cloud.one{top:15%;left:-25%}.cloud.two{top:28%;left:70%;animation-duration:31s;animation-delay:-12s}
+@keyframes cloud{to{transform:translateX(150vw)}}
+.mountains{position:absolute;bottom:34%;width:100%;height:25%;background:#25191a;clip-path:polygon(0 70%,8% 48%,16% 67%,27% 28%,37% 63%,47% 42%,56% 67%,66% 31%,77% 65%,88% 40%,100% 68%,100% 100%,0 100%)}
+.road{position:absolute;bottom:-18%;left:50%;transform:translateX(-50%);width:135%;height:58%;background:#090a0b;clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);box-shadow:inset 0 15px 50px #000}
+.road:after{content:"";position:absolute;left:50%;top:0;width:10px;height:100%;transform:translateX(-50%);background:repeating-linear-gradient(to bottom,#f6d36a 0 55px,transparent 55px 115px);animation:dash .5s linear infinite}
+@keyframes dash{to{background-position-y:115px}}
+.headlight{position:absolute;bottom:14%;width:250px;height:80px;background:#ffeab0;filter:blur(28px);opacity:.3}
+.left{left:2%;transform:rotate(-10deg)}.right{right:2%;transform:rotate(10deg)}
+.car{position:absolute;bottom:19%;left:50%;transform:translateX(-50%);width:230px;height:82px;background:#d71920;border-radius:80px 90px 25px 25px;box-shadow:0 12px 35px #000;z-index:2;animation:car 2s ease-in-out infinite}
+.car:before{content:"";position:absolute;left:52px;top:-35px;width:120px;height:50px;background:#c4141b;border-radius:70px 70px 5px 5px}
+.car:after{content:"";position:absolute;left:32px;bottom:-20px;width:42px;height:42px;border-radius:50%;background:#111;border:8px solid #777;box-shadow:125px 0 #111,125px 0 0 8px #777}
+.window{position:absolute;left:76px;top:-27px;width:42px;height:32px;background:#263a45;border-radius:8px 20px 0 0;transform:skew(-10deg);z-index:3}
+.window.two{left:120px;transform:skew(10deg)}
+.stripe{position:absolute;top:40px;left:0;width:100%;height:9px;background:#f6d34f}
+@keyframes car{50%{transform:translateX(-50%) translateY(-3px)}}
+.content{position:relative;z-index:5;height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{width:min(650px,94vw);text-align:center;padding:38px 28px 32px;background:rgba(5,5,5,.68);border:1px solid rgba(255,255,255,.2);border-radius:28px;backdrop-filter:blur(9px);box-shadow:0 25px 100px #000}
+.kicker{font-family:'Bebas Neue',sans-serif;letter-spacing:4px;color:#f6d34f;font-size:18px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,12vw,105px);line-height:.82;margin:12px 0;text-transform:uppercase;text-shadow:5px 5px 0 #111}
+h1 span{color:#f6d34f}
+p{font-size:18px;line-height:1.55;color:#eee}
+.romantic{font-family:Pacifico,cursive;font-size:24px;color:#fff;margin:20px 0}
+.buttons{height:85px;position:relative;display:flex;align-items:center;justify-content:center;gap:12px}
+button{border:0;border-radius:13px;padding:15px 24px;font-weight:900;font-size:15px;cursor:pointer}
+.yes{background:#d71920;color:#fff;box-shadow:0 8px 25px #000}
+.no{background:#222;color:#aaa;border:1px solid #555;position:relative}
+#answer{display:none;font-family:Pacifico,cursive;font-size:25px;color:#fff;line-height:1.5}
+#answer span{color:#f6d34f}
+.hearts{position:fixed;inset:0;display:none;pointer-events:none;z-index:20}
+.heart{position:absolute;bottom:-30px;animation:rise 4s linear forwards}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="scene">
+<div class="sun"></div><div class="cloud one"></div><div class="cloud two"></div><div class="mountains"></div>
+<div class="road"></div><div class="headlight left"></div><div class="headlight right"></div>
+<div class="car"><div class="window"></div><div class="window two"></div><div class="stripe"></div></div>
+
+<div class="content">
+<div class="card">
+<div class="kicker">Uma aventura a dois</div>
+<h1>Ei, minha<br><span>copilota...</span></h1>
+<p>Tenho uma pergunta importante para fazer.</p>
+<div class="romantic">Você quer ir comigo assistir Carros?</div>
+<p>Prometo dividir a pipoca, deixar você escolher o melhor lugar e, depois do filme...</p>
+<div class="romantic">roubar alguns beijinhos. ❤️</div>
+
+<div class="buttons" id="buttons">
+<button class="yes" onclick="accept()">SIM, EU VOU ❤️</button>
+<button class="no" id="no" onclick="escapeNo()">NÃO</button>
+</div>
+<div id="answer"></div>
+</div>
+</div>
+<div class="hearts" id="hearts"></div>
+</div>
+
+<script>
+let tries=0;
+const no=document.getElementById('no');
+function escapeNo(){
+ tries++;
+ if(tries>=3){
+   no.textContent='TÁ BOM, EU VOU ❤️';
+   no.className='yes';
+   no.onclick=accept;
+   return;
+ }
+ const x=(Math.random()*300)-150;
+ const y=(Math.random()*70)-35;
+ no.style.transform=`translate(${x}px,${y}px) rotate(${Math.random()*12-6}deg)`;
+}
+function accept(){
+ document.getElementById('buttons').style.display='none';
+ const a=document.getElementById('answer');
+ a.style.display='block';
+ a.innerHTML='Então vem cá... ❤️<br><br><span>Filme, pipoca e alguns beijinhos depois.</span>';
+ const h=document.getElementById('hearts');
+ h.style.display='block';
+ for(let i=0;i<60;i++){
+   const e=document.createElement('div');
+   e.className='heart';
+   e.textContent=['❤️','♥','💕'][Math.floor(Math.random()*3)];
+   e.style.left=Math.random()*100+'%';
+   e.style.fontSize=(16+Math.random()*22)+'px';
+   e.style.animationDelay=Math.random()*2+'s';
+   h.appendChild(e);
+ }
+}
+</script>
+</body>
+</html>
